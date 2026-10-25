@@ -118,11 +118,22 @@ const filters = ['all', 'app', 'web', 'web3', 'game', 'level'] as const;
     transition: opacity 0.15s ease, transform 0.15s ease;
   }
 
+  /* Невидимый мостик через зазор, чтобы курсор мог дойти от иконки до карточки и нажать «Подробнее». */
+  .tip::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+    height: 12px;
+  }
+
   @media (hover: hover) {
     .cell:hover .tip,
     .cell:focus-visible .tip {
       opacity: 1;
       transform: translate(-50%, 0);
+      pointer-events: auto;
     }
 
     .cell:hover :global(.tile),
