@@ -32,6 +32,8 @@ const paths = { [lang]: path, [lang === 'ru' ? 'en' : 'ru']: alternatePath(path,
     <title>{fullTitle}</title>
     <meta name="description" content={metaDescription} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={new URL(path, Astro.site)} />
     {
       alternates && (
