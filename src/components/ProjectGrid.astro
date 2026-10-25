@@ -30,7 +30,7 @@ const emptyTypes = types.filter((type) => !released.has(type));
       ))
     }
   </div>
-  <ul class="grid" id="project-list">
+  <ul class="grid" id="project-list" data-active="all">
     {
       projects.map((p) => (
         <li data-tag={p.data.type}>
@@ -57,8 +57,14 @@ const emptyTypes = types.filter((type) => !released.has(type));
             <ProjectIcon icon="lock" soon />
             <span class="tip below" role="tooltip">
               <span class="t-label muted">{t.soon.type}</span>
-              <span class="t-name">{t.soon.name}</span>
-              <span class="t-small">{t.soon.text}</span>
+              <span class="t-name">
+                <span class="on-all">{t.soon.name}</span>
+                <span class="on-tab">{nbh(t.soonName[type])}</span>
+              </span>
+              <span class="t-small">
+                <span class="on-all">{t.soon.text}</span>
+                <span class="on-tab">{nbh(t.emptyType[type])}</span>
+              </span>
             </span>
           </span>
         </li>
@@ -117,6 +123,12 @@ const emptyTypes = types.filter((type) => !released.has(type));
 
   .cell.soon {
     cursor: default;
+  }
+
+  /* у замка на «Все» общий текст, на вкладке категории - по её теме */
+  .grid[data-active='all'] .on-tab,
+  .grid:not([data-active='all']) .on-all {
+    display: none;
   }
 
   .info {

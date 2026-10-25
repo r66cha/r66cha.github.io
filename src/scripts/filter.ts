@@ -11,6 +11,7 @@ document.querySelectorAll<HTMLElement>('[data-filter]').forEach((group) => {
 
     group.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
     const key = button.dataset.key;
+    if (list && key) list.dataset.active = key;
     list?.querySelectorAll<HTMLElement>('[data-tag]').forEach((item) => {
       item.hidden = key !== 'all' && item.dataset.tag !== key;
     });

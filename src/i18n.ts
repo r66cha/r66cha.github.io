@@ -23,8 +23,15 @@ export const ui = {
     filters: { all: 'Все', app: 'Приложения', web: 'Веб', web3: 'Web3', game: 'Игры', level: 'Уровни' },
     filterLabel: 'Тип проекта',
     details: 'Подробнее →',
-    /** Плитка-замок будущего проекта. */
+    /** Плитка-замок будущего проекта: общий текст на «Все» и название по теме вкладки. */
     soon: { type: 'скоро', name: 'Новый проект', text: 'Здесь будут новые проекты.' },
+    soonName: {
+      app: 'Новое приложение',
+      web: 'Новый веб-проект',
+      web3: 'Новый web3-проект',
+      game: 'Новая игра',
+      level: 'Новый уровень',
+    },
     /** Строка на вкладке фильтра, где пока нет готовых проектов. */
     emptyType: {
       app: 'Здесь будут новые приложения.',
@@ -89,6 +96,13 @@ export const ui = {
     filterLabel: 'Project type',
     details: 'Details →',
     soon: { type: 'soon', name: 'New project', text: 'New projects are coming here.' },
+    soonName: {
+      app: 'New app',
+      web: 'New web project',
+      web3: 'New web3 project',
+      game: 'New game',
+      level: 'New level',
+    },
     emptyType: {
       app: 'New apps are coming here.',
       web: 'New web projects are coming here.',
