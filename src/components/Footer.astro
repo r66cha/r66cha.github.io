@@ -1,13 +1,21 @@
 ---
 import { site } from '../site';
+import { ui, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
 ---
 
 <footer class="footer t-small">
-  <nav aria-label="Контакты">
+  <nav aria-label={t.contactsLabel}>
     {
       site.contacts.map((contact) => (
         <a href={contact.href} {...(contact.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>
-          {contact.label}
+          {t.contacts[contact.key]}
         </a>
       ))
     }

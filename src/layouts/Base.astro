@@ -5,29 +5,47 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../site';
+import { ui, alternatePath, type Lang } from '../i18n';
 
 interface Props {
+  lang: Lang;
   title?: string;
   description?: string;
   active?: 'projects' | 'blog' | 'about';
+  /** Есть ли у страницы версия на другом языке (у 404 - нет). */
+  alternates?: boolean;
 }
 
-const { title, description = site.description, active } = Astro.props;
-const fullTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.role}`;
+const { lang, title, description, active, alternates = true } = Astro.props;
+const t = ui[lang];
+const fullTitle = title ? `${title} - ${t.name}` : `${t.name} - ${site.role}`;
+const metaDescription = description ?? `${t.name} - ${site.role}. ${t.bio}`;
+const path = Astro.url.pathname;
+const paths = { [lang]: path, [lang === 'ru' ? 'en' : 'ru']: alternatePath(path, lang) } as Record<Lang, string>;
 ---
 
 <!doctype html>
-<html lang="ru">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={new URL(path, Astro.site)} />
+    {
+      alternates && (
+        <>
+          <link rel="alternate" hreflang="ru" href={new URL(paths.ru, Astro.site)} />
+          <link rel="alternate" hreflang="en" href={new URL(paths.en, Astro.site)} />
+          <link rel="alternate" hreflang="x-default" href={new URL(paths.ru, Astro.site)} />
+        </>
+      )
+    }
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'ru' ? 'ru_RU' : 'en_US'} />
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:image" content={new URL('/images/portrait-dark.webp', Astro.site)} />
     <meta name="generator" content={Astro.generator} />
     <script is:inline>
@@ -45,10 +63,10 @@ const fullTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site
     </script>
   </head>
   <body>
-    <Header active={active} />
+    <Header lang={lang} active={active} alternates={alternates} />
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

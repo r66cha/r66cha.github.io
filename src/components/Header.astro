@@ -1,38 +1,57 @@
 ---
-import { site } from '../site';
+import { ui, localePath, alternatePath, type Lang } from '../i18n';
 
 interface Props {
+  lang: Lang;
   active?: 'projects' | 'blog' | 'about';
+  alternates?: boolean;
 }
 
-const { active } = Astro.props;
+const { lang, active, alternates = true } = Astro.props;
+const t = ui[lang];
 const links = [
-  { key: 'projects', label: 'Проекты', href: '/projects/' },
-  { key: 'blog', label: 'Колонка', href: '/blog/' },
-  { key: 'about', label: 'Обо мне', href: '/about/' },
+  { key: 'projects', href: '/projects/' },
+  { key: 'blog', href: '/blog/' },
+  { key: 'about', href: '/about/' },
 ] as const;
+const other: Lang = lang === 'ru' ? 'en' : 'ru';
+const otherHref = alternates ? alternatePath(Astro.url.pathname, lang) : localePath(other, '/');
 ---
 
 <header class="header" data-header>
-  <a href="/" class="t-name">{site.name}</a>
-  <nav class="nav t-small" id="site-nav" aria-label="Разделы">
+  <a href={localePath(lang, '/')} class="t-name">{t.name}</a>
+  <nav class="nav t-small" id="site-nav" aria-label={t.navLabel}>
     {
       links.map((link) => (
         <a
-          href={link.href}
+          href={localePath(lang, link.href)}
           class:list={{ muted: active && active !== link.key }}
           aria-current={active === link.key ? 'page' : undefined}
         >
-          {link.label}
+          {t.nav[link.key]}
         </a>
       ))
     }
-    <span class="lang">RU <span class="muted" title="English version is coming soon">EN</span></span>
+    <span class="lang" aria-label={t.langLabel}>
+      {
+        lang === 'ru' ? (
+          <>
+            <span aria-current="true">RU</span>
+            <a href={otherHref} class="muted" hreflang="en" lang="en">EN</a>
+          </>
+        ) : (
+          <>
+            <a href={otherHref} class="muted" hreflang="ru" lang="ru">RU</a>
+            <span aria-current="true">EN</span>
+          </>
+        )
+      }
+    </span>
   </nav>
   <div class="actions">
-    <button class="t-name" type="button" data-theme-toggle aria-label="Сменить тему">◐</button>
+    <button class="t-name" type="button" data-theme-toggle aria-label={t.theme}>◐</button>
     <button class="menu t-small" type="button" data-menu aria-expanded="false" aria-controls="site-nav">
-      Меню
+      {t.menu}
     </button>
   </div>
 </header>
@@ -74,6 +93,8 @@ const links = [
   }
 
   .lang {
+    display: inline-flex;
+    gap: 0.35em;
     white-space: nowrap;
   }
 

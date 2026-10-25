@@ -144,7 +144,7 @@ button {
   padding: 96px 24px 0;
 }
 
-/* Сведения «ключ — значение» */
+/* Сведения «ключ - значение» */
 .facts {
   display: grid;
   grid-template-columns: 120px 1fr;

@@ -1,23 +1,27 @@
 ---
-import { getCollection } from 'astro:content';
 import ProjectIcon from './ProjectIcon.astro';
-import { projectFilters, projectTypes, nbh } from '../site';
+import { getProjects, slugOf } from '../lib/content';
+import { ui, localePath, type Lang } from '../i18n';
+import { nbh } from '../site';
 
 interface Props {
-  /** Отступ сверху поменьше — когда над сеткой уже есть заголовок страницы. */
+  lang: Lang;
+  /** Отступ сверху поменьше - когда над сеткой уже есть заголовок страницы. */
   tight?: boolean;
 }
 
-const { tight = false } = Astro.props;
-const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const { lang, tight = false } = Astro.props;
+const t = ui[lang];
+const projects = await getProjects(lang);
+const filters = ['all', 'app', 'web', 'web3', 'game', 'level'] as const;
 ---
 
-<section class:list={['projects', { tight }]} aria-label="Проекты">
-  <div class="filter t-small" role="group" aria-label="Тип проекта" data-filter="project-list">
+<section class:list={['projects', { tight }]} aria-label={t.projects.title}>
+  <div class="filter t-small" role="group" aria-label={t.filterLabel} data-filter="project-list">
     {
-      projectFilters.map((f, i) => (
-        <button type="button" data-key={f.key} aria-pressed={i === 0 ? 'true' : 'false'}>
-          {f.label}
+      filters.map((key, i) => (
+        <button type="button" data-key={key} aria-pressed={i === 0 ? 'true' : 'false'}>
+          {t.filters[key]}
         </button>
       ))
     }
@@ -26,13 +30,17 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     {
       projects.map((p) => (
         <li data-tag={p.data.type}>
-          <a href={`/projects/${p.id}/`} class="cell" aria-label={`${p.data.title} — ${projectTypes[p.data.type]}`}>
+          <a
+            href={localePath(lang, `/projects/${slugOf(p)}/`)}
+            class="cell"
+            aria-label={`${p.data.title} - ${t.projectTypes[p.data.type]}`}
+          >
             <ProjectIcon icon={p.data.icon} />
             <span class="tip" role="tooltip">
-              <span class="t-label muted">{projectTypes[p.data.type]}</span>
+              <span class="t-label muted">{t.projectTypes[p.data.type]}</span>
               <span class="t-name">{p.data.title}</span>
               <span class="t-small">{nbh(p.data.summary)}</span>
-              <span class="t-small muted">Подробнее →</span>
+              <span class="t-small muted">{t.details}</span>
             </span>
           </a>
         </li>

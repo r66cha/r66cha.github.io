@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import { getProjects } from '../lib/content';
+import { ui, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const count = (await getProjects(lang)).length;
+---
+
+<Base lang={lang} title={t.projects.title} active="projects">
+  <header class="head">
+    <h1 class="t-title">{t.projects.title}</h1>
+    <p class="t-small muted">{t.projects.summary(count)}</p>
+  </header>
+  <ProjectGrid lang={lang} tight />
+</Base>
+
+<style>
+  .head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 112px 24px 0;
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .head {
+      gap: 10px;
+      padding-top: 56px;
+    }
+  }
+</style>

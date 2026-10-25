@@ -1,0 +1,194 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProjectIcon from '../components/ProjectIcon.astro';
+import { slugOf, type Project } from '../lib/content';
+import { ui, localePath, type Lang } from '../i18n';
+import { nbh } from '../site';
+
+interface Props {
+  lang: Lang;
+  project: Project;
+  prev: Project;
+  next: Project;
+}
+
+const { lang, project, prev, next } = Astro.props;
+const t = ui[lang];
+const { Content } = await render(project);
+const d = project.data;
+const typeLabel = t.projectTypes[d.type];
+const href = (p: Project) => localePath(lang, `/projects/${slugOf(p)}/`);
+---
+
+<Base lang={lang} title={d.title} description={d.summary} active="projects">
+  <article class="column">
+    <a href={localePath(lang, '/projects/')} class="t-small muted">{t.projects.back}</a>
+
+    <header class="head">
+      <ProjectIcon icon={d.icon} class="big" />
+      <p class="t-label muted type">{typeLabel}</p>
+      <h1 class="t-title">{d.title}</h1>
+      <p class="t-lead lead">
+        {nbh(d.lead)}
+        {d.leadMuted && <span class="muted">{nbh(d.leadMuted)}</span>}
+      </p>
+    </header>
+
+    <dl class="facts t-body">
+      <dt>{t.projects.facts.type}</dt>
+      <dd>{typeLabel.charAt(0).toUpperCase() + typeLabel.slice(1)}</dd>
+      <dt>{t.projects.facts.role}</dt>
+      <dd>{d.role}</dd>
+      <dt>{t.projects.facts.stack}</dt>
+      <dd>{d.stack.join(', ')}</dd>
+      <dt>{t.projects.facts.status}</dt>
+      <dd>{d.status}</dd>
+    </dl>
+
+    <div class="story t-body">
+      <Content />
+    </div>
+
+    {
+      d.links.length > 0 && (
+        <p class="links t-body">
+          {d.links.map((link) => (
+            <a href={link.href} target="_blank" rel="noopener">
+              {link.label} ↗
+            </a>
+          ))}
+        </p>
+      )
+    }
+
+    <nav class="prevnext t-small" aria-label={t.projects.other}>
+      <a href={href(prev)}>
+        <ProjectIcon icon={prev.data.icon} class="mini" />
+        ← {prev.data.title}
+      </a>
+      <a href={href(next)}>
+        {next.data.title} →
+        <ProjectIcon icon={next.data.icon} class="mini" />
+      </a>
+    </nav>
+  </article>
+</Base>
+
+<style>
+  .head {
+    padding-top: 72px;
+  }
+
+  .head :global(.big) {
+    --size: 128px;
+  }
+
+  .type {
+    margin-top: 40px;
+  }
+
+  h1 {
+    margin-top: 10px;
+  }
+
+  .lead {
+    margin-top: 20px;
+  }
+
+  .facts {
+    margin-top: 56px;
+  }
+
+  .story {
+    margin-top: 72px;
+  }
+
+  .story :global(h2) {
+    margin: 40px 0 8px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+
+  .story :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .story :global(p + p) {
+    margin-top: 12px;
+  }
+
+  .links {
+    display: flex;
+    gap: 28px;
+    margin-top: 56px;
+  }
+
+  .prevnext {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 120px;
+  }
+
+  .prevnext a {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .prevnext :global(.mini) {
+    --size: 40px;
+  }
+
+  @media (max-width: 640px) {
+    .head {
+      padding-top: 40px;
+    }
+
+    .head :global(.big) {
+      --size: 96px;
+    }
+
+    .type {
+      margin-top: 28px;
+    }
+
+    .lead {
+      margin-top: 16px;
+    }
+
+    .facts {
+      margin-top: 40px;
+    }
+
+    .story {
+      margin-top: 48px;
+      font-size: 17px;
+      line-height: 28px;
+    }
+
+    .story :global(h2) {
+      margin-top: 32px;
+    }
+
+    .links {
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .prevnext {
+      margin-top: 72px;
+    }
+
+    .prevnext a {
+      gap: 12px;
+    }
+
+    .prevnext :global(.mini) {
+      --size: 32px;
+    }
+  }
+</style>

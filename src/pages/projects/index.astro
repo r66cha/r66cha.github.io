@@ -1,34 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import ProjectGrid from '../../components/ProjectGrid.astro';
-import { plural } from '../../site';
-
-const count = (await getCollection('projects')).length;
+import ProjectsView from '../../views/ProjectsView.astro';
 ---
 
-<Base title="Проекты" active="projects">
-  <header class="head">
-    <h1 class="t-title">Проекты</h1>
-    <p class="t-small muted">{count} {plural(count, ['проект', 'проекта', 'проектов'])}: приложения, веб, web3, игры и уровни</p>
-  </header>
-  <ProjectGrid tight />
-</Base>
-
-<style>
-  .head {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    padding: 112px 24px 0;
-    text-align: center;
-  }
-
-  @media (max-width: 640px) {
-    .head {
-      gap: 10px;
-      padding-top: 56px;
-    }
-  }
-</style>
+<ProjectsView lang="ru" />

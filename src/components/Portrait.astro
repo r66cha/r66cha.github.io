@@ -1,20 +1,18 @@
 ---
-import { site } from '../site';
-
 interface Props {
+  alt: string;
   width: number;
   height: number;
   mobileWidth?: number;
   mobileHeight?: number;
 }
 
-const { width, height, mobileWidth = width, mobileHeight = height } = Astro.props;
+const { alt, width, height, mobileWidth = width, mobileHeight = height } = Astro.props;
 ---
 
-<!-- Светлая тема: белый фон и белая одежда; тёмная: чёрный фон. Обе версии ч/б. -->
+<!-- Ч/б портрет на чёрном фоне - один и тот же в обеих темах. -->
 <span class="portrait" style={`--w: ${width}px; --h: ${height}px; --mw: ${mobileWidth}px; --mh: ${mobileHeight}px`}>
-  <img class="only-light" src="/images/portrait-light.webp" alt={site.name} width={width} height={height} />
-  <img class="only-dark" src="/images/portrait-dark.webp" alt={site.name} width={width} height={height} />
+  <img src="/images/portrait-dark.webp" alt={alt} width={width} height={height} />
 </span>
 
 <style>
@@ -24,7 +22,7 @@ const { width, height, mobileWidth = width, mobileHeight = height } = Astro.prop
     width: var(--w);
     height: var(--h);
     overflow: hidden;
-    background: var(--surface);
+    background: #0a0a0a;
   }
 
   img {

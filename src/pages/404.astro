@@ -2,11 +2,14 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="Страница не найдена">
+<Base lang="ru" title="Страница не найдена" alternates={false}>
   <section class="column">
     <h1 class="t-title">Страница не найдена</h1>
-    <p class="t-lead muted">Такой страницы нет или она переехала.</p>
-    <a href="/" class="t-small">← На главную</a>
+    <p class="t-lead muted" lang="en">Page not found</p>
+    <p class="links t-small">
+      <a href="/">← На главную</a>
+      <a href="/en/" lang="en">← Home</a>
+    </p>
   </section>
 </Base>
 
@@ -18,5 +21,11 @@ import Base from '../layouts/Base.astro';
     gap: 20px;
     padding-top: 160px;
     text-align: center;
+  }
+
+  .links {
+    display: flex;
+    gap: 28px;
+    margin-top: 20px;
   }
 </style>

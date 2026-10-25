@@ -1,5 +1,5 @@
 // Пиктограммы проектов (viewBox 0 0 40 40). Цвет берётся из currentColor:
-// плитка рисуется цветом текста, а рисунок — цветом фона, поэтому в тёмной теме всё инвертируется.
+// плитка рисуется цветом текста, а рисунок - цветом фона, поэтому в тёмной теме всё инвертируется.
 const S = 'stroke="currentColor" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"';
 const F = 'fill="currentColor"';
 
