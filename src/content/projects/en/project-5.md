@@ -3,7 +3,7 @@ title: "Project 5"
 type: web3
 icon: web3-b
 order: 8
-summary: "Smart contracts in Solidity: what the project does and who it is for. Click - full page."
+summary: "Smart contracts in Solidity: what the project does and who it is for. Click to open the full page."
 lead: "A decentralized app built on smart contracts."
 leadMuted: "Short description: what the project is, what problem it solves and who it is for."
 role: "Technical Product Owner, development"
@@ -24,4 +24,4 @@ Key decisions: product, architecture, interface. Only what truly sets the projec
 
 ## Result
 
-Launch, numbers, user feedback - whatever shows the value of the project.
+Launch, numbers, user feedback: whatever shows the value of the project.

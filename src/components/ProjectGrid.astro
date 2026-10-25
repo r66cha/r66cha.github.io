@@ -33,7 +33,7 @@ const filters = ['all', 'app', 'web', 'web3', 'game', 'level'] as const;
           <a
             href={localePath(lang, `/projects/${slugOf(p)}/`)}
             class="cell has-tip"
-            aria-label={`${p.data.title} - ${t.projectTypes[p.data.type]}`}
+            aria-label={`${p.data.title} | ${t.projectTypes[p.data.type]}`}
           >
             <ProjectIcon icon={p.data.icon} />
             <span class="tip below" role="tooltip">

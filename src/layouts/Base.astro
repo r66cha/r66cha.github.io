@@ -18,8 +18,8 @@ interface Props {
 
 const { lang, title, description, active, alternates = true } = Astro.props;
 const t = ui[lang];
-const fullTitle = title ? `${title} - ${t.name}` : `${t.name} - ${site.role}`;
-const metaDescription = description ?? `${t.name} - ${site.role}. ${t.bio}`;
+const fullTitle = title ? `${title} | ${t.name}` : `${t.name} | ${site.role}`;
+const metaDescription = description ?? `${t.name} | ${site.role}. ${t.bio}`;
 const path = Astro.url.pathname;
 const paths = { [lang]: path, [lang === 'ru' ? 'en' : 'ru']: alternatePath(path, lang) } as Record<Lang, string>;
 ---

@@ -21,4 +21,4 @@ Key decisions: product, architecture, interface. Only what truly sets the projec
 
 ## Result
 
-Launch, numbers, user feedback - whatever shows the value of the project.
+Launch, numbers, user feedback: whatever shows the value of the project.

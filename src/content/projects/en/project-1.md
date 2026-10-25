@@ -3,7 +3,7 @@ title: "Project 1"
 type: app
 icon: app-a
 order: 1
-summary: "iOS app: what it does and who it is for. Click - full page."
+summary: "iOS app: what it does and who it is for. Click to open the full page."
 lead: "An iPhone app."
 leadMuted: "Short description: what problem it solves and who it is for."
 role: "Technical Product Owner, development"
@@ -21,4 +21,4 @@ Key decisions: product, architecture, interface. Only what truly sets the projec
 
 ## Result
 
-Launch, numbers, user feedback - whatever shows the value of the project.
+Launch, numbers, user feedback: whatever shows the value of the project.

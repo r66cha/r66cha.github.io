@@ -1,7 +1,7 @@
 # r66cha.github.io
 
 Личный сайт Руслана Чукавина, Technical Product Owner: проекты, игры и уровни, колонка.
-Сайт на двух языках: русский - <https://r66cha.github.io>, английский - <https://r66cha.github.io/en/>.
+Русская версия: <https://r66cha.github.io>, английская: <https://r66cha.github.io/en/>.
 
 Минималистичный ч/б дизайн в двух темах (светлая и тёмная), только текст и пиктограммы.
 Макет в Figma: <https://www.figma.com/design/KgVBJXvvjajPxGGe7oha8U/Ruslan-Chukavin>
