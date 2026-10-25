@@ -56,7 +56,7 @@ export const ui = {
         'Пишу на Python, Solidity, Swift и TypeScript. Помимо продуктов занимаюсь Level- и Game-дизайном: придумываю игры и уровни к ним.',
       ],
       facts: [
-        ['Роль', 'Technical Product Owner | CEO'],
+        ['Роль', 'Technical Product Owner | Founder'],
         ['Продукт', 'Управление и создание продуктов'],
         ['Код', 'Python, Solidity, Swift, TypeScript'],
         ['Игры', 'Level-дизайн, Game-дизайн'],
@@ -108,7 +108,7 @@ export const ui = {
         'I write Python, Solidity, Swift and TypeScript. Beyond products, I do level and game design: I come up with games and the levels for them.',
       ],
       facts: [
-        ['Role', 'Technical Product Owner | CEO'],
+        ['Role', 'Technical Product Owner | Founder'],
         ['Product', 'Product management and building products'],
         ['Code', 'Python, Solidity, Swift, TypeScript'],
         ['Games', 'Level design, game design'],
