@@ -1,14 +1,6 @@
 export const languages = ['ru', 'en'] as const;
 export type Lang = (typeof languages)[number];
 
-const pluralRu = (n: number, [one, few, many]: [string, string, string]) => {
-  const mod10 = n % 10;
-  const mod100 = n % 100;
-  if (mod10 === 1 && mod100 !== 11) return one;
-  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
-  return many;
-};
-
 export const ui = {
   ru: {
     locale: 'ru-RU',
@@ -31,13 +23,21 @@ export const ui = {
     filters: { all: 'Все', app: 'Приложения', web: 'Веб', web3: 'Web3', game: 'Игры', level: 'Уровни' },
     filterLabel: 'Тип проекта',
     details: 'Подробнее →',
+    /** Плитка-замок будущего проекта. */
+    soon: { type: 'скоро', name: 'Новый проект', text: 'Здесь будут новые проекты.' },
+    /** Строка на вкладке фильтра, где пока нет готовых проектов. */
+    emptyType: {
+      app: 'Здесь будут новые приложения.',
+      web: 'Здесь будут новые веб-проекты.',
+      web3: 'Здесь будут новые web3-проекты.',
+      game: 'Здесь будут новые игры.',
+      level: 'Здесь будут новые уровни.',
+    },
     projects: {
       title: 'Проекты',
-      summary: (n: number) =>
-        `${n} ${pluralRu(n, ['проект', 'проекта', 'проектов'])}: приложения, веб, web3, игры и уровни`,
+      summary: 'Shum уже работает, остальное готовится: игры, уровни, веб и web3',
       back: '← Все проекты',
       other: 'Другие проекты',
-      facts: { type: 'Тип', role: 'Роль', stack: 'Стек', status: 'Статус' },
     },
     blog: {
       title: 'Колонка',
@@ -46,7 +46,11 @@ export const ui = {
       next: 'Следующая статья',
       minutes: 'мин',
       topicLabel: 'Тема',
-      topics: { product: 'Продукт', dev: 'Разработка', web3: 'Web3', gamedesign: 'Геймдизайн' },
+      topics: { product: 'Продукт', dev: 'Разработка', web3: 'Web3', gamedesign: 'Геймдизайн', thoughts: 'Мысли вслух' },
+      empty: {
+        title: 'Первые статьи скоро.',
+        text: 'Здесь буду писать о том, как делаю проекты: решения, ошибки и выводы.',
+      },
     },
     about: {
       title: 'Обо мне',
@@ -84,12 +88,19 @@ export const ui = {
     filters: { all: 'All', app: 'Apps', web: 'Web', web3: 'Web3', game: 'Games', level: 'Levels' },
     filterLabel: 'Project type',
     details: 'Details →',
+    soon: { type: 'soon', name: 'New project', text: 'New projects are coming here.' },
+    emptyType: {
+      app: 'New apps are coming here.',
+      web: 'New web projects are coming here.',
+      web3: 'New web3 projects are coming here.',
+      game: 'New games are coming here.',
+      level: 'New levels are coming here.',
+    },
     projects: {
       title: 'Projects',
-      summary: (n: number) => `${n} ${n === 1 ? 'project' : 'projects'}: apps, web, web3, games and levels`,
+      summary: 'Shum is live, more is on the way: games, levels, web and web3',
       back: '← All projects',
       other: 'Other projects',
-      facts: { type: 'Type', role: 'Role', stack: 'Stack', status: 'Status' },
     },
     blog: {
       title: 'Writing',
@@ -98,7 +109,11 @@ export const ui = {
       next: 'Next article',
       minutes: 'min',
       topicLabel: 'Topic',
-      topics: { product: 'Product', dev: 'Development', web3: 'Web3', gamedesign: 'Game design' },
+      topics: { product: 'Product', dev: 'Development', web3: 'Web3', gamedesign: 'Game design', thoughts: 'Thinking out loud' },
+      empty: {
+        title: 'First articles soon.',
+        text: 'I will write about how I build projects: decisions, mistakes and takeaways.',
+      },
     },
     about: {
       title: 'About',

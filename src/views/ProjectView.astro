@@ -19,6 +19,8 @@ const { Content } = await render(project);
 const d = project.data;
 const typeLabel = t.projectTypes[d.type];
 const href = (p: Project) => localePath(lang, `/projects/${slugOf(p)}/`);
+// пока проект один, соседей нет и стрелки не показываем
+const hasNeighbours = prev.id !== project.id;
 ---
 
 <Base lang={lang} title={d.title} description={d.summary} active="projects">
@@ -35,16 +37,18 @@ const href = (p: Project) => localePath(lang, `/projects/${slugOf(p)}/`);
       </p>
     </header>
 
-    <dl class="facts t-body">
-      <dt>{t.projects.facts.type}</dt>
-      <dd>{typeLabel.charAt(0).toUpperCase() + typeLabel.slice(1)}</dd>
-      <dt>{t.projects.facts.role}</dt>
-      <dd>{d.role}</dd>
-      <dt>{t.projects.facts.stack}</dt>
-      <dd>{d.stack.join(', ')}</dd>
-      <dt>{t.projects.facts.status}</dt>
-      <dd>{d.status}</dd>
-    </dl>
+    {
+      d.facts.length > 0 && (
+        <dl class="facts t-body">
+          {d.facts.map(([key, value]) => (
+            <>
+              <dt>{key}</dt>
+              <dd>{nbh(value)}</dd>
+            </>
+          ))}
+        </dl>
+      )
+    }
 
     <div class="story t-body">
       <Content />
@@ -62,16 +66,18 @@ const href = (p: Project) => localePath(lang, `/projects/${slugOf(p)}/`);
       )
     }
 
-    <nav class="prevnext t-small" aria-label={t.projects.other}>
-      <a href={href(prev)}>
-        <ProjectIcon icon={prev.data.icon} class="mini" />
-        ← {prev.data.title}
-      </a>
-      <a href={href(next)}>
-        {next.data.title} →
-        <ProjectIcon icon={next.data.icon} class="mini" />
-      </a>
-    </nav>
+    {
+      hasNeighbours && (
+        <nav class="prevnext t-small" aria-label={t.projects.other}>
+          <a href={href(prev)}>
+            <ProjectIcon icon={prev.data.icon} class="mini" />← {prev.data.title}
+          </a>
+          <a href={href(next)}>
+            {next.data.title} →<ProjectIcon icon={next.data.icon} class="mini" />
+          </a>
+        </nav>
+      )
+    }
   </article>
 </Base>
 

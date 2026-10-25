@@ -2,7 +2,7 @@
 import ProjectIcon from './ProjectIcon.astro';
 import { getProjects, slugOf } from '../lib/content';
 import { ui, localePath, type Lang } from '../i18n';
-import { nbh } from '../site';
+import { nbh, site } from '../site';
 
 interface Props {
   lang: Lang;
@@ -13,7 +13,11 @@ interface Props {
 const { lang, tight = false } = Astro.props;
 const t = ui[lang];
 const projects = await getProjects(lang);
-const filters = ['all', 'app', 'web', 'web3', 'game', 'level'] as const;
+const types = ['app', 'web', 'web3', 'game', 'level'] as const;
+const filters = ['all', ...types] as const;
+// вкладки без готовых проектов показывают строку «Здесь будут новые …»
+const released = new Set(projects.map((p) => p.data.type));
+const emptyTypes = types.filter((type) => !released.has(type));
 ---
 
 <section class:list={['projects', { tight }]} aria-label={t.projects.title}>
@@ -46,7 +50,28 @@ const filters = ['all', 'app', 'web', 'web3', 'game', 'level'] as const;
         </li>
       ))
     }
+    {
+      site.upcoming.map((type) => (
+        <li data-tag={type}>
+          <span class="cell soon has-tip" tabindex="0" aria-label={`${t.soon.name} | ${t.soon.type}`}>
+            <ProjectIcon icon="lock" soon />
+            <span class="tip below" role="tooltip">
+              <span class="t-label muted">{t.soon.type}</span>
+              <span class="t-name">{t.soon.name}</span>
+              <span class="t-small">{t.soon.text}</span>
+            </span>
+          </span>
+        </li>
+      ))
+    }
   </ul>
+  {
+    emptyTypes.map((type) => (
+      <p class="info t-body muted" data-info-for="project-list" data-info={type} hidden>
+        {nbh(t.emptyType[type])}
+      </p>
+    ))
+  }
 </section>
 
 <script>
@@ -90,6 +115,15 @@ const filters = ['all', 'app', 'web', 'web3', 'game', 'level'] as const;
     opacity: 1;
   }
 
+  .cell.soon {
+    cursor: default;
+  }
+
+  .info {
+    margin-top: -24px;
+    text-align: center;
+  }
+
   /* При наведении плитка вместе с рисунком чуть уменьшается. */
   .cell :global(.tile) {
     transition: transform 0.2s ease, background-color 0.25s ease, color 0.25s ease;
@@ -112,10 +146,11 @@ const filters = ['all', 'app', 'web', 'web3', 'game', 'level'] as const;
       padding-top: 40px;
     }
 
+    /* пять плиток в ряд помещаются даже на телефонах шириной 360px */
     .grid {
       --size: 48px;
-      gap: 24px;
-      max-width: calc(5 * 48px + 4 * 24px);
+      gap: 16px;
+      max-width: calc(5 * 48px + 4 * 16px);
     }
   }
 </style>

@@ -50,30 +50,28 @@ public/images/      # ч/б портрет и пиксель-арт аватар
 ---
 title: "Название"
 type: app            # app | web | web3 | game | level
-icon: app-a          # ключ из src/data/icons.ts
-order: 11            # порядок в сетке
+icon: shum           # ключ из src/data/icons.ts
+order: 2             # порядок в сетке
 summary: "Текст подсказки при наведении."
 lead: "Первое предложение описания."
 leadMuted: "Продолжение серым."
-role: "Technical Product Owner"
-stack: ["Swift"]
-status: "Запущен"
+facts:
+  - ["Роль", "Founder"]
+  - ["Платформы", "iOS"]
 links:
-  - label: "GitHub"
-    href: "https://github.com/r66cha"
+  - label: "getshum.tech"
+    href: "https://getshum.tech/"
 ---
 
-## Задача
+## Идея
 
 …
 ```
 
-Новую пиктограмму можно добавить в `src/data/icons.ts` (viewBox 40×40, цвет `currentColor`).
+Новую пиктограмму можно добавить в `src/data/icons.ts`: линиями (viewBox 40×40, цвет `currentColor`) или пикселями через `pixels([...])` на сетке 12×12, как у Shum.
+
+Серые плитки-замки «скоро» задаются списком категорий `upcoming` в `src/site.ts`: когда в категории появится готовый проект, её можно убрать из списка. Подзаголовок страницы «Проекты» - `projects.summary` в `src/i18n.ts`.
 
 ## Как добавить статью
 
-Создать `src/content/posts/ru/<slug>.md` и `src/content/posts/en/<slug>.md` с полями `title`, `date`, `readTime`, `topic` (`product | dev | web3 | gamedesign`), `lead` и текстом в Markdown.
-
-## TODO
-
-- Заменить тексты-заглушки в проектах и статьях на реальные (на обоих языках)
+Создать `src/content/posts/ru/<slug>.md` и `src/content/posts/en/<slug>.md` с полями `title`, `date`, `readTime`, `topic` (`product | dev | web3 | gamedesign | thoughts`), `lead` и текстом в Markdown. Пока статей нет, в колонке показывается блок «Первые статьи скоро».

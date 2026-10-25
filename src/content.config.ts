@@ -14,9 +14,8 @@ const projects = defineCollection({
     /** Первое предложение описания (чёрным) и продолжение (серым). */
     lead: z.string(),
     leadMuted: z.string().optional(),
-    role: z.string(),
-    stack: z.array(z.string()),
-    status: z.string(),
+    /** Сведения «ключ - значение» на странице проекта, например ["Роль", "Founder"]. */
+    facts: z.array(z.tuple([z.string(), z.string()])).default([]),
     links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
   }),
 });
@@ -27,7 +26,7 @@ const posts = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     readTime: z.number(),
-    topic: z.enum(['product', 'dev', 'web3', 'gamedesign']),
+    topic: z.enum(['product', 'dev', 'web3', 'gamedesign', 'thoughts']),
     lead: z.string(),
   }),
 });

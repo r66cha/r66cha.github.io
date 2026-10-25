@@ -29,20 +29,27 @@ const filters = [['all', t.filters.all], ...Object.entries(t.blog.topics)];
       }
     </div>
 
-    <ul class="posts" id="post-list">
-      {
-        posts.map((post) => (
-          <li data-tag={post.data.topic}>
-            <a href={localePath(lang, `/blog/${slugOf(post)}/`)}>
-              <span class="t-lead">{nbh(post.data.title)}</span>
-              <span class="t-small muted">
-                {formatDate(post.data.date, lang)} · {post.data.readTime} {t.blog.minutes}
-              </span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    {
+      posts.length > 0 ? (
+        <ul class="posts" id="post-list">
+          {posts.map((post) => (
+            <li data-tag={post.data.topic}>
+              <a href={localePath(lang, `/blog/${slugOf(post)}/`)}>
+                <span class="t-lead">{nbh(post.data.title)}</span>
+                <span class="t-small muted">
+                  {formatDate(post.data.date, lang)} · {post.data.readTime} {t.blog.minutes}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="empty">
+          <p class="t-text">{t.blog.empty.title}</p>
+          <p class="t-body muted">{nbh(t.blog.empty.text)}</p>
+        </div>
+      )
+    }
   </section>
 </Base>
 
@@ -78,7 +85,18 @@ const filters = [['all', t.filters.all], ...Object.entries(t.blog.topics)];
     gap: 6px;
   }
 
+  .empty {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 56px;
+  }
+
   @media (max-width: 640px) {
+    .empty {
+      margin-top: 40px;
+    }
+
     .column {
       padding-top: 56px;
     }
