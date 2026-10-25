@@ -25,8 +25,7 @@ export const ui = {
       email: { type: 'почта', text: 'Напишите мне: проекты, сотрудничество или просто привет.', action: 'Написать →' },
       telegram: { type: 'telegram', text: 'Мой канал в Telegram.', action: 'Открыть канал →' },
       github: { type: 'github', text: 'Мой GitHub: код и проекты.', action: 'Открыть GitHub →' },
-      // число решённых задач обновлять вручную (и в английской версии ниже)
-      leetcode: { type: 'leetcode', text: 'Мой LeetCode: 135 решённых задач, решаю в свободное время.', action: 'Открыть профиль →' },
+      leetcode: { type: 'leetcode', text: 'Мой профиль на LeetCode: алгоритмические задачи.', action: 'Открыть профиль →' },
     },
     projectTypes: { app: 'приложение', web: 'веб', web3: 'web3', game: 'игра', level: 'уровень' },
     filters: { all: 'Все', app: 'Приложения', web: 'Веб', web3: 'Web3', game: 'Игры', level: 'Уровни' },
@@ -79,7 +78,7 @@ export const ui = {
       email: { type: 'email', text: 'Write to me: projects, collaboration or just say hi.', action: 'Write →' },
       telegram: { type: 'telegram', text: 'My Telegram channel.', action: 'Open channel →' },
       github: { type: 'github', text: 'My GitHub: code and projects.', action: 'Open GitHub →' },
-      leetcode: { type: 'leetcode', text: 'My LeetCode: 135 problems solved, in my spare time.', action: 'Open profile →' },
+      leetcode: { type: 'leetcode', text: 'My LeetCode profile: algorithm problems.', action: 'Open profile →' },
     },
     projectTypes: { app: 'app', web: 'web', web3: 'web3', game: 'game', level: 'level' },
     filters: { all: 'All', app: 'Apps', web: 'Web', web3: 'Web3', game: 'Games', level: 'Levels' },
