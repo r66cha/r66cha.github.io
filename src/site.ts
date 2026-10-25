@@ -4,6 +4,7 @@ export const site = {
     { key: 'email', href: 'mailto:r66cha@gmail.com', handle: 'r66cha@gmail.com' },
     { key: 'telegram', href: 'https://t.me/r_chukavin', handle: '@r_chukavin' },
     { key: 'github', href: 'https://github.com/r66cha', handle: 'github.com/r66cha' },
+    { key: 'leetcode', href: 'https://leetcode.com/u/r66cha/', handle: 'leetcode.com/u/r66cha' },
   ],
 } as const;
 

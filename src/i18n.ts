@@ -20,11 +20,13 @@ export const ui = {
     theme: 'Сменить тему',
     langLabel: 'Язык',
     contactsLabel: 'Контакты',
-    contacts: { email: 'Почта', telegram: 'Telegram', github: 'GitHub' },
+    contacts: { email: 'Почта', telegram: 'Telegram', github: 'GitHub', leetcode: 'LeetCode' },
     contactTips: {
       email: { type: 'почта', text: 'Напишите мне: проекты, сотрудничество или просто привет.', action: 'Написать →' },
       telegram: { type: 'telegram', text: 'Мой канал в Telegram.', action: 'Открыть канал →' },
       github: { type: 'github', text: 'Мой GitHub: код и проекты.', action: 'Открыть GitHub →' },
+      // число решённых задач обновлять вручную (и в английской версии ниже)
+      leetcode: { type: 'leetcode', text: 'Мой LeetCode: 135 решённых задач, решаю в свободное время.', action: 'Открыть профиль →' },
     },
     projectTypes: { app: 'приложение', web: 'веб', web3: 'web3', game: 'игра', level: 'уровень' },
     filters: { all: 'Все', app: 'Приложения', web: 'Веб', web3: 'Web3', game: 'Игры', level: 'Уровни' },
@@ -72,11 +74,12 @@ export const ui = {
     theme: 'Toggle theme',
     langLabel: 'Language',
     contactsLabel: 'Contacts',
-    contacts: { email: 'Email', telegram: 'Telegram', github: 'GitHub' },
+    contacts: { email: 'Email', telegram: 'Telegram', github: 'GitHub', leetcode: 'LeetCode' },
     contactTips: {
       email: { type: 'email', text: 'Write to me: projects, collaboration or just say hi.', action: 'Write →' },
       telegram: { type: 'telegram', text: 'My Telegram channel.', action: 'Open channel →' },
       github: { type: 'github', text: 'My GitHub: code and projects.', action: 'Open GitHub →' },
+      leetcode: { type: 'leetcode', text: 'My LeetCode: 135 problems solved, in my spare time.', action: 'Open profile →' },
     },
     projectTypes: { app: 'app', web: 'web', web3: 'web3', game: 'game', level: 'level' },
     filters: { all: 'All', app: 'Apps', web: 'Web', web3: 'Web3', game: 'Games', level: 'Levels' },
