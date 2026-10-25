@@ -94,6 +94,11 @@ const filters = ['all', 'app', 'web', 'web3', 'game', 'level'] as const;
     opacity: 1;
   }
 
+  /* При наведении плитка вместе с рисунком чуть уменьшается. */
+  .cell :global(.tile) {
+    transition: transform 0.2s ease, background-color 0.25s ease, color 0.25s ease;
+  }
+
   .tip {
     position: absolute;
     z-index: 10;
@@ -118,6 +123,11 @@ const filters = ['all', 'app', 'web', 'web3', 'game', 'level'] as const;
     .cell:focus-visible .tip {
       opacity: 1;
       transform: translate(-50%, 0);
+    }
+
+    .cell:hover :global(.tile),
+    .cell:focus-visible :global(.tile) {
+      transform: scale(0.92);
     }
   }
 
