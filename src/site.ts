@@ -1,10 +1,9 @@
 export const site = {
   role: 'Technical Product Owner',
-  // TODO: заменить почту и Telegram на настоящие
   contacts: [
-    { key: 'email', href: 'mailto:hello@example.com' },
-    { key: 'telegram', href: 'https://t.me/username' },
-    { key: 'github', href: 'https://github.com/r66cha' },
+    { key: 'email', href: 'mailto:r66cha@gmail.com', handle: 'r66cha@gmail.com' },
+    { key: 'telegram', href: 'https://t.me/r_chukavin', handle: '@r_chukavin' },
+    { key: 'github', href: 'https://github.com/r66cha', handle: 'github.com/r66cha' },
   ],
 } as const;
 

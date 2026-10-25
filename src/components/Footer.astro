@@ -14,8 +14,18 @@ const t = ui[lang];
   <nav aria-label={t.contactsLabel}>
     {
       site.contacts.map((contact) => (
-        <a href={contact.href} {...(contact.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>
-          {t.contacts[contact.key]}
+        <a
+          href={contact.href}
+          class="contact has-tip"
+          {...(contact.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}
+        >
+          <span class="label">{t.contacts[contact.key]}</span>
+          <span class="tip above" role="tooltip">
+            <span class="t-label muted">{t.contactTips[contact.key].type}</span>
+            <span class="t-name">{contact.handle}</span>
+            <span class="t-small">{t.contactTips[contact.key].text}</span>
+            <span class="t-small muted">{t.contactTips[contact.key].action}</span>
+          </span>
         </a>
       ))
     }
@@ -35,6 +45,19 @@ const t = ui[lang];
   nav {
     display: flex;
     gap: 28px;
+  }
+
+  .contact {
+    display: inline-block;
+  }
+
+  /* Ссылка целиком не тускнеет, иначе потускнела бы и карточка - гаснет только подпись. */
+  .contact:hover {
+    opacity: 1;
+  }
+
+  .contact:hover .label {
+    opacity: 0.6;
   }
 
   @media (max-width: 640px) {

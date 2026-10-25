@@ -32,11 +32,11 @@ const filters = ['all', 'app', 'web', 'web3', 'game', 'level'] as const;
         <li data-tag={p.data.type}>
           <a
             href={localePath(lang, `/projects/${slugOf(p)}/`)}
-            class="cell"
+            class="cell has-tip"
             aria-label={`${p.data.title} - ${t.projectTypes[p.data.type]}`}
           >
             <ProjectIcon icon={p.data.icon} />
-            <span class="tip" role="tooltip">
+            <span class="tip below" role="tooltip">
               <span class="t-label muted">{t.projectTypes[p.data.type]}</span>
               <span class="t-name">{p.data.title}</span>
               <span class="t-small">{nbh(p.data.summary)}</span>
@@ -82,10 +82,6 @@ const filters = ['all', 'app', 'web', 'web3', 'game', 'level'] as const;
     list-style: none;
   }
 
-  .grid li {
-    position: relative;
-  }
-
   .cell {
     display: block;
   }
@@ -99,43 +95,7 @@ const filters = ['all', 'app', 'web', 'web3', 'game', 'level'] as const;
     transition: transform 0.2s ease, background-color 0.25s ease, color 0.25s ease;
   }
 
-  .tip {
-    position: absolute;
-    z-index: 10;
-    top: calc(100% + 12px);
-    left: 50%;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    width: 260px;
-    padding: 16px 18px;
-    background: var(--fg);
-    color: var(--bg);
-    text-align: left;
-    opacity: 0;
-    pointer-events: none;
-    transform: translate(-50%, 4px);
-    transition: opacity 0.15s ease, transform 0.15s ease;
-  }
-
-  /* Невидимый мостик через зазор, чтобы курсор мог дойти от иконки до карточки и нажать «Подробнее». */
-  .tip::before {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: 100%;
-    left: 0;
-    height: 12px;
-  }
-
   @media (hover: hover) {
-    .cell:hover .tip,
-    .cell:focus-visible .tip {
-      opacity: 1;
-      transform: translate(-50%, 0);
-      pointer-events: auto;
-    }
-
     .cell:hover :global(.tile),
     .cell:focus-visible :global(.tile) {
       transform: scale(0.92);

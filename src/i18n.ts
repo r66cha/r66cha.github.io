@@ -21,6 +21,11 @@ export const ui = {
     langLabel: 'Язык',
     contactsLabel: 'Контакты',
     contacts: { email: 'Почта', telegram: 'Telegram', github: 'GitHub' },
+    contactTips: {
+      email: { type: 'почта', text: 'Напишите мне: проекты, сотрудничество или просто привет.', action: 'Написать →' },
+      telegram: { type: 'telegram', text: 'Мой канал в Telegram.', action: 'Открыть канал →' },
+      github: { type: 'github', text: 'Мой GitHub: код и проекты.', action: 'Открыть GitHub →' },
+    },
     projectTypes: { app: 'приложение', web: 'веб', web3: 'web3', game: 'игра', level: 'уровень' },
     filters: { all: 'Все', app: 'Приложения', web: 'Веб', web3: 'Web3', game: 'Игры', level: 'Уровни' },
     filterLabel: 'Тип проекта',
@@ -68,6 +73,11 @@ export const ui = {
     langLabel: 'Language',
     contactsLabel: 'Contacts',
     contacts: { email: 'Email', telegram: 'Telegram', github: 'GitHub' },
+    contactTips: {
+      email: { type: 'email', text: 'Write to me: projects, collaboration or just say hi.', action: 'Write →' },
+      telegram: { type: 'telegram', text: 'My Telegram channel.', action: 'Open channel →' },
+      github: { type: 'github', text: 'My GitHub: code and projects.', action: 'Open GitHub →' },
+    },
     projectTypes: { app: 'app', web: 'web', web3: 'web3', game: 'game', level: 'level' },
     filters: { all: 'All', app: 'Apps', web: 'Web', web3: 'Web3', game: 'Games', level: 'Levels' },
     filterLabel: 'Project type',

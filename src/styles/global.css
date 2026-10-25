@@ -171,10 +171,63 @@ button {
   color: var(--fg);
 }
 
-/* Ч/б фото: светлая и тёмная версия, видна только нужная */
-:root[data-theme='dark'] .only-light,
-:root:not([data-theme='dark']) .only-dark {
-  display: none;
+/* Карточка-подсказка при наведении: под иконкой проекта (.below) или над контактом (.above).
+   Лежит внутри ссылки .has-tip, поэтому клик по карточке открывает ту же ссылку. */
+.has-tip {
+  position: relative;
+}
+
+.tip {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 260px;
+  padding: 16px 18px;
+  background: var(--fg);
+  color: var(--bg);
+  text-align: left;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.tip.below {
+  top: calc(100% + 12px);
+  transform: translate(-50%, 4px);
+}
+
+.tip.above {
+  bottom: calc(100% + 12px);
+  transform: translate(-50%, -4px);
+}
+
+/* Невидимый мостик через зазор, чтобы курсор мог дойти до карточки и нажать на неё. */
+.tip::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 12px;
+}
+
+.tip.below::before {
+  bottom: 100%;
+}
+
+.tip.above::before {
+  top: 100%;
+}
+
+@media (hover: hover) {
+  .has-tip:hover > .tip,
+  .has-tip:focus-visible > .tip {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    pointer-events: auto;
+  }
 }
 
 @media (max-width: 640px) {

@@ -21,7 +21,7 @@ const { alt, width, height, mobileWidth = width, mobileHeight = height } = Astro
 </span>
 
 <script>
-  // На тач-устройствах наведения нет — фото показывается по тапу.
+  // На тач-устройствах наведения нет - фото показывается по тапу.
   document.querySelectorAll<HTMLElement>('[data-portrait]').forEach((portrait) => {
     portrait.addEventListener('click', () => {
       if (matchMedia('(hover: none)').matches) portrait.classList.toggle('revealed');
