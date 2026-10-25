@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Portrait from '../components/Portrait.astro';
-import { site, nbh } from '../site';
+import { nbh } from '../site';
 import { ui, type Lang } from '../i18n';
 
 interface Props {
@@ -17,10 +17,7 @@ const t = ui[lang];
     <Portrait alt={t.name} width={240} height={300} mobileWidth={200} mobileHeight={250} />
 
     <h1 class="t-title">{t.name}</h1>
-    <p class="t-lead lead">
-      {site.role}.
-      <span class="muted">{nbh(t.about.lead)}</span>
-    </p>
+    <p class="t-lead lead muted">{nbh(t.about.lead)}</p>
 
     <div class="t-text body">
       {t.about.paragraphs.map((p) => <p>{nbh(p)}</p>)}

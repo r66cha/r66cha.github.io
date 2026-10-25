@@ -52,11 +52,11 @@ export const ui = {
       title: 'Обо мне',
       lead: 'Создаю и развиваю продукты, пишу код и проектирую игры и уровни.',
       paragraphs: [
-        'Как Technical Product Owner веду продукт от идеи до релиза: формулирую, что и зачем строим, и сам разбираюсь в том, как это устроено технически.',
+        'Веду продукт от идеи до релиза: формулирую, что и зачем строим, и сам разбираюсь в том, как это устроено технически.',
         'Пишу на Python, Solidity, Swift и TypeScript. Помимо продуктов занимаюсь Level- и Game-дизайном: придумываю игры и уровни к ним.',
       ],
       facts: [
-        ['Роль', 'Technical Product Owner'],
+        ['Роль', 'Technical Product Owner | CEO'],
         ['Продукт', 'Управление и создание продуктов'],
         ['Код', 'Python, Solidity, Swift, TypeScript'],
         ['Игры', 'Level-дизайн, Game-дизайн'],
@@ -104,11 +104,11 @@ export const ui = {
       title: 'About',
       lead: 'I build and grow products, write code and design games and levels.',
       paragraphs: [
-        'As a Technical Product Owner I take products from idea to release: I define what we build and why, and I dig into how it works under the hood.',
+        'I take products from idea to release: I define what we build and why, and I dig into how it works under the hood.',
         'I write Python, Solidity, Swift and TypeScript. Beyond products, I do level and game design: I come up with games and the levels for them.',
       ],
       facts: [
-        ['Role', 'Technical Product Owner'],
+        ['Role', 'Technical Product Owner | CEO'],
         ['Product', 'Product management and building products'],
         ['Code', 'Python, Solidity, Swift, TypeScript'],
         ['Games', 'Level design, game design'],

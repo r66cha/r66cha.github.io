@@ -1,5 +1,5 @@
 export const site = {
-  role: 'Technical Product Owner',
+  role: 'Technical Product Owner | CEO',
   contacts: [
     { key: 'email', href: 'mailto:r66cha@gmail.com', handle: 'r66cha@gmail.com' },
     { key: 'telegram', href: 'https://t.me/r_chukavin', handle: '@r_chukavin' },
