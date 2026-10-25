@@ -10,13 +10,28 @@ interface Props {
 const { alt, width, height, mobileWidth = width, mobileHeight = height } = Astro.props;
 ---
 
-<!-- Ч/б портрет на чёрном фоне - один и тот же в обеих темах. -->
-<span class="portrait" style={`--w: ${width}px; --h: ${height}px; --mw: ${mobileWidth}px; --mh: ${mobileHeight}px`}>
-  <img src="/images/portrait-dark.webp" alt={alt} width={width} height={height} />
+<!-- Пиксельная аватарка поверх ч/б фото: при наведении (или тапе на телефоне) пиксели растворяются и видно фото. -->
+<span
+  class="portrait"
+  data-portrait
+  style={`--w: ${width}px; --h: ${height}px; --mw: ${mobileWidth}px; --mh: ${mobileHeight}px`}
+>
+  <img class="photo" src="/images/portrait-dark.webp" alt={alt} width={width} height={height} />
+  <img class="pixel" src="/images/portrait-pixel.png" alt="" aria-hidden="true" width={width} height={height} />
 </span>
+
+<script>
+  // На тач-устройствах наведения нет — фото показывается по тапу.
+  document.querySelectorAll<HTMLElement>('[data-portrait]').forEach((portrait) => {
+    portrait.addEventListener('click', () => {
+      if (matchMedia('(hover: none)').matches) portrait.classList.toggle('revealed');
+    });
+  });
+</script>
 
 <style>
   .portrait {
+    position: relative;
     display: block;
     flex: none;
     width: var(--w);
@@ -26,10 +41,27 @@ const { alt, width, height, mobileWidth = width, mobileHeight = height } = Astro
   }
 
   img {
+    position: absolute;
+    inset: 0;
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .pixel {
+    image-rendering: pixelated;
+    transition: opacity 0.25s ease;
+  }
+
+  .portrait.revealed .pixel {
+    opacity: 0;
+  }
+
+  @media (hover: hover) {
+    .portrait:hover .pixel {
+      opacity: 0;
+    }
   }
 
   @media (max-width: 640px) {
