@@ -1,0 +1,128 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { postTopics, formatDate, nbh } from '../../site';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('posts')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, next: posts[(i + 1) % posts.length] },
+  }));
+}
+
+const { post, next } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+---
+
+<Base title={d.title} description={d.lead} active="blog">
+  <article class="column">
+    <a href="/blog/" class="t-small muted">← Колонка</a>
+
+    <p class="t-small muted meta">
+      <time datetime={d.date.toISOString().slice(0, 10)}>{formatDate(d.date)}</time> · {d.readTime} мин · {
+        postTopics[d.topic]
+      }
+    </p>
+    <h1 class="t-title">{nbh(d.title)}</h1>
+    <p class="t-lead muted lead">{nbh(d.lead)}</p>
+
+    <div class="prose t-text">
+      <Content />
+    </div>
+
+    <a class="next" href={`/blog/${next.id}/`}>
+      <span class="t-small muted">Следующая статья</span>
+      <span class="t-lead">{nbh(next.data.title)} →</span>
+    </a>
+  </article>
+</Base>
+
+<style>
+  .meta {
+    margin-top: 72px;
+  }
+
+  h1 {
+    margin-top: 16px;
+  }
+
+  .lead {
+    margin-top: 24px;
+  }
+
+  .prose {
+    margin-top: 56px;
+  }
+
+  .prose :global(p + p) {
+    margin-top: 24px;
+  }
+
+  .prose :global(h2) {
+    margin: 48px 0 16px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: -0.01em;
+  }
+
+  .prose :global(blockquote) {
+    margin: 32px 0;
+    padding-left: 40px;
+    color: var(--muted);
+    font-size: 24px;
+    line-height: 34px;
+    letter-spacing: -0.015em;
+  }
+
+  .prose :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .next {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 120px;
+  }
+
+  @media (max-width: 640px) {
+    .meta {
+      margin-top: 40px;
+    }
+
+    h1 {
+      margin-top: 12px;
+    }
+
+    .lead {
+      margin-top: 16px;
+    }
+
+    .prose {
+      margin-top: 40px;
+    }
+
+    .prose :global(p + p) {
+      margin-top: 20px;
+    }
+
+    .prose :global(h2) {
+      margin-top: 36px;
+    }
+
+    .prose :global(blockquote) {
+      padding-left: 20px;
+      font-size: 19px;
+      line-height: 28px;
+    }
+
+    .next {
+      gap: 4px;
+      margin-top: 72px;
+    }
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+import { site } from '../site';
+---
+
+<footer class="footer t-small">
+  <nav aria-label="Контакты">
+    {
+      site.contacts.map((contact) => (
+        <a href={contact.href} {...(contact.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>
+          {contact.label}
+        </a>
+      ))
+    }
+  </nav>
+  <p class="muted">© {new Date().getFullYear()}</p>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 200px 24px 72px;
+  }
+
+  nav {
+    display: flex;
+    gap: 28px;
+  }
+
+  @media (max-width: 640px) {
+    .footer {
+      gap: 12px;
+      padding: 96px 24px 48px;
+    }
+
+    nav {
+      gap: 24px;
+    }
+  }
+</style>

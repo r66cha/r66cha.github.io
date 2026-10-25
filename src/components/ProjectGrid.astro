@@ -1,0 +1,133 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectIcon from './ProjectIcon.astro';
+import { projectFilters, projectTypes, nbh } from '../site';
+
+interface Props {
+  /** Отступ сверху поменьше — когда над сеткой уже есть заголовок страницы. */
+  tight?: boolean;
+}
+
+const { tight = false } = Astro.props;
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class:list={['projects', { tight }]} aria-label="Проекты">
+  <div class="filter t-small" role="group" aria-label="Тип проекта" data-filter="project-list">
+    {
+      projectFilters.map((f, i) => (
+        <button type="button" data-key={f.key} aria-pressed={i === 0 ? 'true' : 'false'}>
+          {f.label}
+        </button>
+      ))
+    }
+  </div>
+  <ul class="grid" id="project-list">
+    {
+      projects.map((p) => (
+        <li data-tag={p.data.type}>
+          <a href={`/projects/${p.id}/`} class="cell" aria-label={`${p.data.title} — ${projectTypes[p.data.type]}`}>
+            <ProjectIcon icon={p.data.icon} />
+            <span class="tip" role="tooltip">
+              <span class="t-label muted">{projectTypes[p.data.type]}</span>
+              <span class="t-name">{p.data.title}</span>
+              <span class="t-small">{nbh(p.data.summary)}</span>
+              <span class="t-small muted">Подробнее →</span>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<script>
+  import '../scripts/filter';
+</script>
+
+<style>
+  .projects {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 56px;
+    padding: 120px 24px 0;
+  }
+
+  .projects.tight {
+    padding-top: 72px;
+  }
+
+  .filter {
+    justify-content: center;
+  }
+
+  .grid {
+    --size: 64px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 48px;
+    max-width: calc(5 * 64px + 4 * 48px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .grid li {
+    position: relative;
+  }
+
+  .cell {
+    display: block;
+  }
+
+  .cell:hover {
+    opacity: 1;
+  }
+
+  .tip {
+    position: absolute;
+    z-index: 10;
+    top: calc(100% + 12px);
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 260px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: var(--fg);
+    color: var(--bg);
+    text-align: left;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  @media (hover: hover) {
+    .cell:hover .tip,
+    .cell:focus-visible .tip {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .projects {
+      gap: 36px;
+      padding-top: 72px;
+    }
+
+    .projects.tight {
+      padding-top: 40px;
+    }
+
+    .grid {
+      --size: 48px;
+      gap: 24px;
+      max-width: calc(5 * 48px + 4 * 24px);
+    }
+  }
+</style>

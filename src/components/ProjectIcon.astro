@@ -1,0 +1,29 @@
+---
+import { icons, type IconKey } from '../data/icons';
+
+interface Props {
+  icon: IconKey;
+  /** Размер плитки в px; без него берётся --size из родителя (по умолчанию 64). */
+  size?: number;
+  class?: string;
+}
+
+const { icon, size, class: className } = Astro.props;
+---
+
+<span class:list={['tile', className]} style={size ? `--size: ${size}px` : undefined} aria-hidden="true">
+  <svg viewBox="0 0 40 40" width="62.5%" height="62.5%" set:html={icons[icon]} />
+</span>
+
+<style>
+  .tile {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    width: var(--size, 64px);
+    height: var(--size, 64px);
+    background: var(--fg);
+    color: var(--bg);
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+</style>

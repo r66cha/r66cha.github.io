@@ -1,0 +1,121 @@
+---
+import { site } from '../site';
+
+interface Props {
+  active?: 'projects' | 'blog' | 'about';
+}
+
+const { active } = Astro.props;
+const links = [
+  { key: 'projects', label: 'Проекты', href: '/projects/' },
+  { key: 'blog', label: 'Колонка', href: '/blog/' },
+  { key: 'about', label: 'Обо мне', href: '/about/' },
+] as const;
+---
+
+<header class="header" data-header>
+  <a href="/" class="t-name">{site.name}</a>
+  <nav class="nav t-small" id="site-nav" aria-label="Разделы">
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          class:list={{ muted: active && active !== link.key }}
+          aria-current={active === link.key ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))
+    }
+    <span class="lang">RU <span class="muted" title="English version is coming soon">EN</span></span>
+  </nav>
+  <div class="actions">
+    <button class="t-name" type="button" data-theme-toggle aria-label="Сменить тему">◐</button>
+    <button class="menu t-small" type="button" data-menu aria-expanded="false" aria-controls="site-nav">
+      Меню
+    </button>
+  </div>
+</header>
+
+<script>
+  const root = document.documentElement;
+  document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch {}
+  });
+
+  const header = document.querySelector('[data-header]');
+  const menu = document.querySelector('[data-menu]');
+  menu?.addEventListener('click', () => {
+    const open = header?.classList.toggle('open') ?? false;
+    menu.setAttribute('aria-expanded', String(open));
+  });
+</script>
+
+<style>
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 32px var(--pad);
+  }
+
+  .header > a {
+    margin-right: auto;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .lang {
+    white-space: nowrap;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  @media (max-width: 640px) {
+    .header {
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px var(--pad);
+    }
+
+    .actions {
+      order: 2;
+    }
+
+    .menu {
+      display: inline;
+    }
+
+    .nav {
+      display: none;
+      order: 3;
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0 8px;
+      font-size: 19px;
+      line-height: 28px;
+    }
+
+    .header.open .nav {
+      display: flex;
+    }
+  }
+</style>

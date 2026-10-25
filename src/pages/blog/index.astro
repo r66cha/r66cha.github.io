@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { postTopics, formatDate, nbh } from '../../site';
+
+const posts = (await getCollection('posts')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const filters = [['all', 'Все'], ...Object.entries(postTopics)];
+---
+
+<Base title="Колонка" active="blog">
+  <section class="column">
+    <h1 class="t-title">Колонка</h1>
+    <p class="t-lead muted intro">Заметки о продуктах, разработке и геймдизайне.</p>
+
+    <div class="filter t-small" role="group" aria-label="Тема" data-filter="post-list">
+      {
+        filters.map(([key, label], i) => (
+          <button type="button" data-key={key} aria-pressed={i === 0 ? 'true' : 'false'}>
+            {label}
+          </button>
+        ))
+      }
+    </div>
+
+    <ul class="posts" id="post-list">
+      {
+        posts.map((post) => (
+          <li data-tag={post.data.topic}>
+            <a href={`/blog/${post.id}/`}>
+              <span class="t-lead">{nbh(post.data.title)}</span>
+              <span class="t-small muted">
+                {formatDate(post.data.date)} · {post.data.readTime} мин
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
+
+<script>
+  import '../../scripts/filter';
+</script>
+
+<style>
+  .column {
+    padding-top: 112px;
+  }
+
+  .intro {
+    margin-top: 12px;
+  }
+
+  .filter {
+    margin-top: 48px;
+  }
+
+  .posts {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin: 56px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .posts a {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  @media (max-width: 640px) {
+    .column {
+      padding-top: 56px;
+    }
+
+    .intro {
+      margin-top: 10px;
+    }
+
+    .filter {
+      margin-top: 32px;
+    }
+
+    .posts {
+      gap: 28px;
+      margin-top: 40px;
+    }
+
+    .posts a {
+      gap: 4px;
+    }
+  }
+</style>

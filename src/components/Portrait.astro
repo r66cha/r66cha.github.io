@@ -1,0 +1,43 @@
+---
+import { site } from '../site';
+
+interface Props {
+  width: number;
+  height: number;
+  mobileWidth?: number;
+  mobileHeight?: number;
+}
+
+const { width, height, mobileWidth = width, mobileHeight = height } = Astro.props;
+---
+
+<!-- Светлая тема: белый фон и белая одежда; тёмная: чёрный фон. Обе версии ч/б. -->
+<span class="portrait" style={`--w: ${width}px; --h: ${height}px; --mw: ${mobileWidth}px; --mh: ${mobileHeight}px`}>
+  <img class="only-light" src="/images/portrait-light.webp" alt={site.name} width={width} height={height} />
+  <img class="only-dark" src="/images/portrait-dark.webp" alt={site.name} width={width} height={height} />
+</span>
+
+<style>
+  .portrait {
+    display: block;
+    flex: none;
+    width: var(--w);
+    height: var(--h);
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 640px) {
+    .portrait {
+      width: var(--mw);
+      height: var(--mh);
+    }
+  }
+</style>
