@@ -9,8 +9,7 @@ leadMuted: "Works over Bluetooth nearby, even with no network, and over the inte
 facts:
   - ["Type", "Messenger"]
   - ["Role", "Founder"]
-  - ["Platforms", "iOS, macOS, Windows, Linux, browser, CLI for macOS and Windows"]
-  - ["Status", "iOS 1.1, others in preview"]
+  - ["Platforms", "iOS, macOS, Windows, Linux, browser, CLI"]
 links:
   - label: "getshum.tech"
     href: "https://getshum.tech/"
@@ -26,4 +25,4 @@ One message, two paths: over Bluetooth nearby, without the internet, or through 
 
 ## Where it runs
 
-iOS: version 1.1. macOS, Windows, Linux and browser: preview 0.1.8. CLI for macOS and Windows: preview. Android and CLI for Linux are in development.
+A mobile app for iOS, desktop apps for macOS, Windows and Linux, a browser version and a CLI for the terminal.

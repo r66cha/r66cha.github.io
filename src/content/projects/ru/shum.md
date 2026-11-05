@@ -9,8 +9,7 @@ leadMuted: "Работает по Bluetooth рядом, даже когда не
 facts:
   - ["Тип", "Мессенджер"]
   - ["Роль", "Founder"]
-  - ["Платформы", "iOS, macOS, Windows, Linux, браузер, CLI для macOS и Windows"]
-  - ["Статус", "iOS 1.1, остальные в превью"]
+  - ["Платформы", "iOS, macOS, Windows, Linux, браузер, CLI"]
 links:
   - label: "getshum.tech"
     href: "https://getshum.tech/"
@@ -26,4 +25,4 @@ links:
 
 ## Где работает
 
-iOS: версия 1.1. macOS, Windows, Linux и браузер: превью 0.1.8. CLI для macOS и Windows: превью. Android и CLI для Linux в разработке.
+Мобильное приложение для iOS, десктоп для macOS, Windows и Linux, версия для браузера и CLI для терминала.
