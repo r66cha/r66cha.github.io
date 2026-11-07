@@ -7,7 +7,7 @@ export const site = {
     { key: 'leetcode', href: 'https://leetcode.com/u/r66cha/', handle: 'leetcode.com/u/r66cha' },
   ],
   /** Категории будущих проектов: в сетке показываются серыми замками «скоро». */
-  upcoming: ['game', 'level', 'web', 'web3'],
+  upcoming: ['game', 'level', 'web3'],
 } as const;
 
 /**

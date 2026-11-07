@@ -19,8 +19,10 @@ const { Content } = await render(project);
 const d = project.data;
 const typeLabel = t.projectTypes[d.type];
 const href = (p: Project) => localePath(lang, `/projects/${slugOf(p)}/`);
-// пока проект один, соседей нет и стрелки не показываем
+// пока проект один, соседей нет и стрелки не показываем;
+// при двух проектах «предыдущий» и «следующий» совпадают - оставляем одну ссылку
 const hasNeighbours = prev.id !== project.id;
+const showPrev = hasNeighbours && prev.id !== next.id;
 ---
 
 <Base lang={lang} title={d.title} description={d.summary} active="projects">
@@ -68,10 +70,12 @@ const hasNeighbours = prev.id !== project.id;
 
     {
       hasNeighbours && (
-        <nav class="prevnext t-small" aria-label={t.projects.other}>
-          <a href={href(prev)}>
-            <ProjectIcon icon={prev.data.icon} class="mini" />← {prev.data.title}
-          </a>
+        <nav class:list={['prevnext t-small', { single: !showPrev }]} aria-label={t.projects.other}>
+          {showPrev && (
+            <a href={href(prev)}>
+              <ProjectIcon icon={prev.data.icon} class="mini" />← {prev.data.title}
+            </a>
+          )}
           <a href={href(next)}>
             {next.data.title} →<ProjectIcon icon={next.data.icon} class="mini" />
           </a>
@@ -137,6 +141,10 @@ const hasNeighbours = prev.id !== project.id;
     justify-content: space-between;
     align-items: center;
     margin-top: 120px;
+  }
+
+  .prevnext.single {
+    justify-content: flex-end;
   }
 
   .prevnext a {
