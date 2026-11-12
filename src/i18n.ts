@@ -42,7 +42,7 @@ export const ui = {
     },
     projects: {
       title: 'Проекты',
-      summary: 'Shum и Forposter уже работают, остальное готовится: игры, уровни и web3',
+      summary: 'Shum и Flowposter уже работают, остальное готовится: игры, уровни и web3',
       back: '← Все проекты',
       other: 'Другие проекты',
     },
@@ -112,7 +112,7 @@ export const ui = {
     },
     projects: {
       title: 'Projects',
-      summary: 'Shum and Forposter are live, more is on the way: games, levels and web3',
+      summary: 'Shum and Flowposter are live, more is on the way: games, levels and web3',
       back: '← All projects',
       other: 'Other projects',
     },

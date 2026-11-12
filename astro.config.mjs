@@ -9,4 +9,9 @@ export default defineConfig({
     locales: ['ru', 'en'],
     routing: { prefixDefaultLocale: false },
   },
+  // проект переименован из Forposter во Flowposter: старые ссылки ведут на новую страницу
+  redirects: {
+    '/projects/forposter': '/projects/flowposter/',
+    '/en/projects/forposter': '/en/projects/flowposter/',
+  },
 });

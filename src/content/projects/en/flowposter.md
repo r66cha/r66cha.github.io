@@ -1,7 +1,7 @@
 ---
-title: "Forposter"
+title: "Flowposter"
 type: web
-icon: forposter
+icon: flowposter
 order: 2
 summary: "A post scheduler for Telegram channels."
 lead: "Scheduled posts for your Telegram channel."
@@ -11,13 +11,13 @@ facts:
   - ["Role", "Founder"]
   - ["Platforms", "Web, Telegram bot"]
 links:
-  - label: "forposter.ru"
-    href: "https://forposter.ru/"
+  - label: "flowposter.ru"
+    href: "https://flowposter.ru/"
 ---
 
 ## Idea
 
-A service for Telegram channel authors. Ideas and finished posts live in drafts, you lay them out across the week, and the bot takes care of publishing.
+A service for Telegram channel authors. Ideas and finished posts sit on a shelf, you lay them out across the week, and the bot takes care of publishing.
 
 ## How it works
 
@@ -25,4 +25,4 @@ Sign in with Telegram, no password. Drag a post to the right hour, and the previ
 
 ## Where it runs
 
-In the browser and through the Telegram bot @for_poster_bot. Publishing happens on the service side, so posts go out even when the author has trouble reaching Telegram.
+In the browser and through the Telegram bot @tg_flowposter_bot. Publishing happens on the service side, so posts go out even when the author has trouble reaching Telegram.

@@ -29,8 +29,8 @@ export const icons = {
     '..##........',
     '..#.........',
   ]),
-  // Forposter: карандаш по диагонали, как в логотипе forposter.ru
-  forposter: `<g transform="translate(20 20) rotate(-45) scale(0.72)" ${F}><path d="M-24 0 L-13 -7.7 V7.7 Z"/><path d="M-10.5 -7.7 H18 A4 4 0 0 1 22 -3.7 V3.7 A4 4 0 0 1 18 7.7 H-10.5 Z"/></g>`,
+  // Flowposter: карандаш по диагонали, как в логотипе flowposter.ru
+  flowposter: `<g transform="translate(20 20) rotate(-45) scale(0.72)" ${F}><path d="M-24 0 L-13 -7.7 V7.7 Z"/><path d="M-10.5 -7.7 H18 A4 4 0 0 1 22 -3.7 V3.7 A4 4 0 0 1 18 7.7 H-10.5 Z"/></g>`,
   // замок для плиток будущих проектов
   lock: pixels([
     '............',
